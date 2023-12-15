@@ -1,0 +1,97 @@
+.headerContainer {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.logoText {
+    font-size: 50px;
+    margin-left: 2%;
+}
+
+.dateTimeDiv {
+    /* background-color: rgba(0, 0, 255, 0.432); */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.time {
+    font-size: 30px;
+}
+
+/* ------  ------ */
+.date {
+    font-size: 20px;
+}
+
+
+
+
+
+/* --------------MEDIA CSS RULES----------------- */
+
+@media (min-width: 520px) and (max-width: 549px) {
+    .logoText {
+      font-size: 35px;
+    }
+  
+    .time {
+      font-size: 20px;
+    }
+  
+    .date {
+      font-size: 15px;
+    }
+  }
+  
+  
+  @media (min-width: 400px) and (max-width: 519px) {
+    .logoText {
+      font-size: 35px;
+    }
+  
+    .time {
+      font-size: 20px;
+    }
+  
+    .date {
+      font-size: 10px;
+    }
+  }
+  
+  
+  @media (min-width: 356px) and (max-width: 399px) {
+    .logoText {
+      font-size: 35px;
+    }
+  
+    .time {
+      font-size: 20px;
+    }
+  
+    .date {
+      font-size: 10px;
+    }
+  }
+  
+  
+  @media (min-width: 300px) and (max-width: 355px) {
+    .logoText {
+      font-size: 25px;
+      transition: font-size 0.5s ease;
+    }
+  
+    .time {
+      font-size: 20px;
+      transition: font-size 0.5s ease;
+    }
+  
+    .date {
+      font-size: 10px;
+      transition: font-size 0.5s ease;
+    }
+  }

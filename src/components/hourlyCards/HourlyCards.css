@@ -1,0 +1,106 @@
+.hourlyTempsContainerDiv {
+    /* background-color: rgba(0, 255, 255, 0.363); */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow-y: hidden;
+    margin-top: 30px;
+    padding: 10px;
+    scroll-snap-align: start;
+}
+
+.hourlyTempsContainerDiv::-webkit-scrollbar-track {
+    background: #6c727f;
+    /* Set color of the track */
+    border-radius: 100px;
+
+}
+
+.hourlyTempsContainerDiv::-webkit-scrollbar-thumb {
+    /* Set color of the handle */
+    border-radius: 100px;
+}
+
+.hourlyContentDiv {
+    /* background-color: aqua; */
+    margin: 10px;
+
+}
+
+.hourlyTempsDiv1 {
+    width: 121px;
+    height: 145px;
+    border-radius: 25px;
+    background: #00071f5e;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.60);
+}
+
+.hourlyTempsDiv2 {
+    width: 121px;
+    height: 72px;
+    border-radius: 20px 20px 25px 25px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    background: #00071f59;
+    flex-shrink: 0;
+    backdrop-filter: blur(4.5px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+}
+
+.hourlyTempImg {
+    margin-top: -30px;
+}
+
+
+
+
+
+
+/* ------ MEDIA STYLES TO MAKE IT MOBILE FRINEDLY ------ */
+
+@media (min-width: 400px) and (max-width: 519px) {
+    .hourlyTempsDiv1 {
+        width: 100px;
+    }
+
+    .hourlyTempsDiv2 {
+        width: 100px;
+    }
+}
+
+
+@media (min-width: 356px) and (max-width: 399px) {
+    .hourlyTempsDiv1 {
+        width: 100px;
+        transition: width 0.5s ease;
+    }
+
+    .hourlyTempsDiv2 {
+        width: 100px;
+        transition: width 0.5s ease;
+    }
+}
+
+
+
+@media (min-width: 300px) and (max-width: 355px) {
+    .hourlyTempsDiv1 {
+        width: 100px;
+        transition: width 0.5s ease;
+    }
+
+    .hourlyTempsDiv2 {
+        width: 100px;
+        transition: width 0.5s ease;
+    }
+}
