@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 
 import './SavedLocations.css'
+import { FaTrash } from "react-icons/fa";
 
 let selectedCityName = ''
 
 
-const SavedLocations = ({ SavedLocationContent, onSelectSavedCity, }) => {
+const SavedLocations = ({ SavedLocationContent, onSelectSavedCity, onDeleteSavedCity }) => {
 
 
     if (SavedLocationContent.length == 0) {
@@ -31,7 +32,14 @@ const SavedLocations = ({ SavedLocationContent, onSelectSavedCity, }) => {
                             <h2>{savedLocation.cityName}</h2>
                         </div>
                         <div className="savedCityTemp" >
-                            <h2>{savedLocation.temperature}</h2>
+                            <span
+                                onClick={(e) => {
+                                    e.stopPropagation(); // Stop event propagation to prevent triggering the onSelectSavedCity handler
+                                    onDeleteSavedCity(savedLocation);
+                                }}
+                            >
+                                <FaTrash  className='trashIcon' />
+                            </span>
 
                         </div>
                     </div>

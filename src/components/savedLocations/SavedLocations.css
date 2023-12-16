@@ -33,7 +33,7 @@
 .savedCityContainerDiv:hover {
     transform: translate(0px, 2px);
     box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.60);
-    transition: transform  0.2s;
+    transition: transform 0.2s;
 }
 
 .savedCityContainerDiv:active {
@@ -69,6 +69,18 @@
     object-fit: cover;
     border-radius: 20px;
     /* z-index: -1; */
+}
+
+.trashIcon {
+    font-size: 20px;
+    display: flex;
+    /* background-color: antiquewhite; */
+}
+
+.trashIcon>path {
+    color: #ffffff;
+
+
 }
 
 

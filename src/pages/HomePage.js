@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import HomePageStyles from './HomePage.module.css'
 
 import SearchLocation from '../components/search/SearchLocation'
 import CurrentCard from '../components/currentCard/CurrentCard'

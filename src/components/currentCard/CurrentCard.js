@@ -17,11 +17,20 @@ const CurrentCard = ({ currentLocationWeatherData, searchLocationWeatherData, se
     const [LowTemps, setLowTemps] = useState('---');
     const [HighTemps, setHighTemps] = useState('---');
     const [WindSpeed, setWindSpeed] = useState('---');
+    const [isCitySaved, setisCitySaved] = useState(false);
 
     const [CardWidth, setCardWidth] = useState('')
     const [CardTransition, setCardTranssition] = useState('')
 
     const [SavedLocationContent, setSavedLocationContent] = useState([]);
+
+    // Initial load from local storage
+    useEffect(() => {
+        const savedLocationsFromLocalStorage = localStorage.getItem('savedLocations');
+        if (savedLocationsFromLocalStorage) {
+            setSavedLocationContent(JSON.parse(savedLocationsFromLocalStorage));
+        }
+    }, []);
 
     useEffect(() => {
 
@@ -138,19 +147,52 @@ const CurrentCard = ({ currentLocationWeatherData, searchLocationWeatherData, se
 
 
     // -----SAVING SEARCHED LOCATIONS----
+
+    // Check if the city is already saved
+    const isCityAlreadySaved = SavedLocationContent.some(
+        (savedLocation) => savedLocation.cityName === cityName
+    );
+    
     const saveCurrentLocation = () => {
         // Ensure there's data before saving
-        if (cityName !== '---' && Temperature !== '---') {
+        if (cityName !== '---') {
             const newSavedLocation = {
                 cityName,
-                temperature: Temperature,
-                backgroundVideo: BackgroundVideo
             };
 
-            // Update the SavedLocationContent state
-            setSavedLocationContent((prevSavedLocations) => [...prevSavedLocations, newSavedLocation]);
+            if (!isCityAlreadySaved) {
+                // Update the SavedLocationContent state
+                setSavedLocationContent((prevSavedLocations) => {
+                    const updatedLocations = [...prevSavedLocations, newSavedLocation];
+
+                    // Save to local storage
+                    localStorage.setItem('savedLocations', JSON.stringify(updatedLocations));
+
+                    return updatedLocations;
+                });
+            } else {
+                // TODO:  ----Show message to user on top of current card----
+                console.log(`${cityName} is already saved.`);
+            }
+
+
         }
     };
+
+
+    // ----Function to delete a saved city----
+    const onDeleteSavedCity = (savedCityToDelete) => {
+        // Filter out the city to delete from the state
+        const updatedSavedLocations = SavedLocationContent.filter(
+            (savedLocationInArray) => savedLocationInArray.cityName !== savedCityToDelete.cityName
+        );
+
+        // Update the state with the new saved locations data
+        setSavedLocationContent(updatedSavedLocations);
+        // Save to local storage
+        localStorage.setItem('savedLocations', JSON.stringify(updatedSavedLocations));
+    };
+
 
 
     const RunApiCallFromSavedCityName = (savedLocation) => {
@@ -158,7 +200,14 @@ const CurrentCard = ({ currentLocationWeatherData, searchLocationWeatherData, se
         // console.log(savedLocation.cityName);
     }
 
+    useEffect(() => {
+        if (isCityAlreadySaved) {
+            setisCitySaved(true)
+        } else {
+            setisCitySaved(false)
+        }
 
+    }, [RunApiCallFromSavedCityName])
 
 
 
@@ -180,7 +229,7 @@ const CurrentCard = ({ currentLocationWeatherData, searchLocationWeatherData, se
 
                     <div>
                         <span className={'currentCardSaveCityBtn'} onClick={saveCurrentLocation}  >
-                            { cityName != '---' ? '+SAVE' : ''}
+                            {isCitySaved == true ? '' : cityName !== '---' ? '+SAVE' : ''}
                         </span>
                     </div>
                 </div>
@@ -228,7 +277,7 @@ const CurrentCard = ({ currentLocationWeatherData, searchLocationWeatherData, se
             </div>
 
             <>
-                <SavedLocations SavedLocationContent={SavedLocationContent} onSelectSavedCity={RunApiCallFromSavedCityName} />
+                <SavedLocations SavedLocationContent={SavedLocationContent} onSelectSavedCity={RunApiCallFromSavedCityName} onDeleteSavedCity={onDeleteSavedCity} />
 
             </>
 
